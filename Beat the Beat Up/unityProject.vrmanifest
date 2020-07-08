@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.beatthebeatup.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "D:\\Github Projects\\Beat the Beat Up\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "D:\\Github Projects\\Beat-the-Beat-Up\\Beat the Beat Up\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "Beat the Beat Up [Testing]"

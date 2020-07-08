@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,9 @@ public class isHit : MonoBehaviour
     Vector3[] vertices;
     Color[] colors;
 
+    Vector3 dir;
+    Vector3 lookSpot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,20 +30,28 @@ public class isHit : MonoBehaviour
         mesh = transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().sharedMesh;
         vertices = mesh.vertices;
         colors = new Color[vertices.Length];
+        dir = transform.forward;
 
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {    
+        if (Input.GetKey(KeyCode.W))
+        {
+            lookSpot = new Vector3(playerCamera.transform.position.x, 0f, playerCamera.transform.position.z);
+            anim.SetBool("run", true);
+            transform.position=Vector3.MoveTowards(transform.position, lookSpot,2.5f*Time.deltaTime);
+        }
+        else
+        {           
+            anim.SetBool("run", false);
+            StartCoroutine(waitToChangeDirction());
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
             face = true;
-            //if(Random.value<0.5f)
-            //  anim.SetTrigger("jawHit");
-            //else
             anim.SetTrigger("jawHit1");
             BoneHighlighter.bone = GameObject.Find("mixamorig:Head").transform;
             StartCoroutine(wait());
@@ -54,6 +66,8 @@ public class isHit : MonoBehaviour
 
         }
 
+        transform.forward = (lookSpot - transform.position).normalized;
+
     }
 
 
@@ -61,9 +75,6 @@ public class isHit : MonoBehaviour
     IEnumerator wait()
     {
         yield return new WaitForSeconds(1.5f);
-        //foreach (int i in vertices)
-        //{
-        //    colors[i].a = Mathf.Max(colors[i].a - Time.deltaTime * 0.5f, 0f);
         if (face)
         {
             BoneHighlighter.bone = null;
@@ -75,11 +86,12 @@ public class isHit : MonoBehaviour
             transform.Find("Tops").GetComponent<SkinnedMeshRenderer>().material.mainTexture = originalTexture;
             gut = false;
         }
+    }
 
-
-
-
-
+    IEnumerator waitToChangeDirction()
+    {
+        yield return new WaitForSeconds(1f);
+        lookSpot = new Vector3(playerCamera.transform.position.x - 1f, 0f, playerCamera.transform.position.z);
     }
 
 

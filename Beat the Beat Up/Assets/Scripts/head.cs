@@ -24,7 +24,7 @@ public class head : MonoBehaviour
             StartCoroutine(wait());
 
 
-            if (spawnDots.time <= 1f)
+            if (spawnDots.time <= 2f)
                 time = "Perfect timing";
             else
                 time = "Too Slow";

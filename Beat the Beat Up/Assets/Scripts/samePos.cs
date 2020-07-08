@@ -1,19 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class samePos : StateMachineBehaviour
 {
 
-    private UnityEngine.Vector3 rot;
-    private UnityEngine.Vector3 rot1;
+    Vector3 dir;
 
     //private Vector3 pos;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rot = animator.transform.rotation.eulerAngles;
+        dir = animator.transform.forward;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -32,7 +30,7 @@ public class samePos : StateMachineBehaviour
         //Debug.Log(animator.transform.parent.name + " " + animator.transform.parent.position);
         //Debug.Log(animator.transform.name + " " + animator.transform.position);
         //Debug.Log(g.transform.position);
-        animator.transform.eulerAngles = rot;
+        animator.transform.forward = dir;
 
        
     }
