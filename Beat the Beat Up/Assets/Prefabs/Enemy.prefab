@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 1162112517922166108}
   - component: {fileID: 1162112517922166110}
   - component: {fileID: 1162112517922166109}
+  - component: {fileID: 3115469676376060651}
   m_Layer: 0
   m_Name: Left Arm
   m_TagString: Untagged
@@ -296,6 +297,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &3115469676376060651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112517922166099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112518145232345
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +320,7 @@ GameObject:
   - component: {fileID: 1162112518145232346}
   - component: {fileID: 1162112518145232324}
   - component: {fileID: 1162112518145232347}
+  - component: {fileID: 164465931990010413}
   m_Layer: 0
   m_Name: Right Arm
   m_TagString: Untagged
@@ -375,6 +389,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &164465931990010413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112518145232345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112518435497970
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +412,7 @@ GameObject:
   - component: {fileID: 1162112518435497971}
   - component: {fileID: 1162112518435497981}
   - component: {fileID: 1162112518435497980}
+  - component: {fileID: 9006650323607501805}
   m_Layer: 0
   m_Name: Right Hand
   m_TagString: Untagged
@@ -454,6 +481,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &9006650323607501805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112518435497970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112518542085303
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +504,7 @@ GameObject:
   - component: {fileID: 1162112518542085296}
   - component: {fileID: 1162112518542085298}
   - component: {fileID: 1162112518542085297}
+  - component: {fileID: 6235023810963660934}
   m_Layer: 0
   m_Name: Right Stomach
   m_TagString: Untagged
@@ -533,6 +573,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &6235023810963660934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112518542085303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112518645017996
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +596,7 @@ GameObject:
   - component: {fileID: 1162112518645017997}
   - component: {fileID: 1162112518645017999}
   - component: {fileID: 1162112518645017998}
+  - component: {fileID: 2415896327884675592}
   m_Layer: 0
   m_Name: Mid Stomach
   m_TagString: Untagged
@@ -612,6 +665,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2415896327884675592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112518645017996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112518759868403
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,8 +688,9 @@ GameObject:
   - component: {fileID: 1162112518759868412}
   - component: {fileID: 1162112518759868414}
   - component: {fileID: 1162112518759868413}
+  - component: {fileID: 5548550223704434790}
   m_Layer: 0
-  m_Name: Right Hand
+  m_Name: Right Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -691,6 +757,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5548550223704434790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112518759868403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112519217590158
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +780,7 @@ GameObject:
   - component: {fileID: 1162112519217590159}
   - component: {fileID: 1162112519217590153}
   - component: {fileID: 1162112519217590152}
+  - component: {fileID: 252503178255053747}
   m_Layer: 0
   m_Name: Left Hand
   m_TagString: Untagged
@@ -770,6 +849,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &252503178255053747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112519217590158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112519273705109
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +872,7 @@ GameObject:
   - component: {fileID: 1162112519273705110}
   - component: {fileID: 1162112519273705104}
   - component: {fileID: 1162112519273705111}
+  - component: {fileID: 5350104196459425874}
   m_Layer: 0
   m_Name: Left Head
   m_TagString: Untagged
@@ -849,6 +941,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5350104196459425874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112519273705109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112519309210273
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +964,7 @@ GameObject:
   - component: {fileID: 1162112519309210274}
   - component: {fileID: 1162112519309210284}
   - component: {fileID: 1162112519309210275}
+  - component: {fileID: 6780924278143910821}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -928,6 +1033,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &6780924278143910821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112519309210273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112519347839469
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,6 +1056,7 @@ GameObject:
   - component: {fileID: 1162112519347839470}
   - component: {fileID: 1162112519347839464}
   - component: {fileID: 1162112519347839471}
+  - component: {fileID: 7592976723506717412}
   m_Layer: 0
   m_Name: Left Stomach
   m_TagString: Untagged
@@ -1007,6 +1125,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7592976723506717412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112519347839469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162112519492754662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,6 +1148,7 @@ GameObject:
   - component: {fileID: 1162112519492754663}
   - component: {fileID: 1162112519492754657}
   - component: {fileID: 1162112519492754656}
+  - component: {fileID: 7298466491999550122}
   m_Layer: 0
   m_Name: Mid Head
   m_TagString: Untagged
@@ -1086,6 +1217,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7298466491999550122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162112519492754662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28620ec626bb08644a8056d7eee9120d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1167306663363168500
 GameObject:
   m_ObjectHideFlags: 0
@@ -3130,6 +3273,7 @@ GameObject:
   - component: {fileID: 1162112519374675125}
   - component: {fileID: 7134064904931540816}
   - component: {fileID: 7640641750279540653}
+  - component: {fileID: 5763735790985309790}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -3240,6 +3384,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 4
   stopDist: 0.2
+  minSpawnDist: 4
+  maxSpawnDist: 8
+--- !u!114 &5763735790985309790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7134064904931540823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127115c3d5cd03744aaa12f4a3d99706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RightStomach: {fileID: 1162112518542085303}
+  MidStomach: {fileID: 1162112518645017996}
+  LeftStomach: {fileID: 1162112519347839469}
+  Chest: {fileID: 1162112519309210273}
+  LeftArm: {fileID: 1162112517922166099}
+  LeftHand: {fileID: 1162112519217590158}
+  RightHead: {fileID: 1162112518759868403}
+  MidHead: {fileID: 1162112519492754662}
+  LeftHead: {fileID: 1162112519273705109}
+  RightArm: {fileID: 1162112518145232345}
+  RightHand: {fileID: 1162112518435497970}
 --- !u!1 &7149742569434336050
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,6 @@ public class EnemySpawner : MonoBehaviour
     // spawn cooldown time constant
     public int mCoolDown;
 
-    private GameObject[] spawnPoints;
     private bool spawn;
     // current cooldown 
     private float coolDown;
@@ -18,21 +17,10 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         spawn = true;
-
-        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            // spawn an fixed point enemy
-            Vector3 spawnPos = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
-            // spawn enemy
-            GameObject newEnemy = Instantiate(enemy);
-            newEnemy.transform.position = spawnPos;
-        }
-
         if(Input.GetKeyDown(KeyCode.K))
         {
             GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
@@ -66,9 +54,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Vector3 spawnPos = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
         // spawn enemy
         GameObject newEnemy = Instantiate(enemy);
-        newEnemy.transform.position = spawnPos;
     }
 }

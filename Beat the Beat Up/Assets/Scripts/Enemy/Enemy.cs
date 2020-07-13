@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
     public float runSpeed;
     public float stopDist;
+    public float minSpawnDist;
+    public float maxSpawnDist;
 
     private GameObject destination;
     private bool reachDest;
@@ -17,6 +20,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // initialize variable
         reachDest = false;
 
         // get player
@@ -38,25 +42,28 @@ public class Enemy : MonoBehaviour
                 break;
             }
         }
+        Vector3 destPos = destination.transform.position;
 
-        // adjust forward direction to face destination
-        Vector3 dir = destination.transform.position - transform.position;
-        transform.forward = Vector3.Normalize(dir);
-        Debug.DrawLine(transform.position, transform.position + dir * 10, Color.green, 20);
+
+        // place enemy at some distance away from destination while lining up with the player and enemy destination
+        float dist = Random.Range(minSpawnDist, maxSpawnDist);
+        Vector3 awayFromPlayer = Vector3.Normalize(destPos - player.transform.position.XZPlane());
+        transform.position = destPos + awayFromPlayer * dist;
+
+        // adjust forward direction to face player
+        transform.forward = Vector3.Normalize(-1 * awayFromPlayer);
+        Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.green, 10);
     }
 
     private void FixedUpdate()
     {
         if (!reachDest)
         {
-            // face player
-            Vector3 dir = destination.transform.position - transform.position;
-            transform.forward = Vector3.Normalize(dir);
             // run
+            transform.forward = Vector3.Normalize(player.transform.position.XZPlane() - transform.position.XZPlane());
             transform.position += transform.forward * runSpeed * Time.fixedDeltaTime;
 
-
-            if (Vector3.Distance(transform.position, destination.transform.position) <= stopDist)
+            if (Vector3.Distance(transform.position.XZPlane(), destination.transform.position.XZPlane()) <= stopDist)
             {
                 Debug.Log("REACH DESTINATION");
                 reachDest = true;
@@ -65,7 +72,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            // face player
+            // face player (with some offset to look better)
             transform.LookAt(player.transform.position + transform.right * 1.5f);
         }
     }
