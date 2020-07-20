@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Valve.VR;
 
 public class MusicEventHandler : MonoBehaviour
 {
@@ -25,8 +26,16 @@ public class MusicEventHandler : MonoBehaviour
         events = new Queue<MusicEvent>();
 
         string path = "Assets/Resources/test.txt";
+        string path1 = "Assets/Resources/attacks.txt";
+
         StreamReader reader = new StreamReader(path);
+        StreamReader reader1 = new StreamReader(path1);
+
         string[] content = File.ReadAllLines(path);
+        string[] attackList = File.ReadAllLines(path1);
+
+        int attackIndex = 0;
+
 
 
         int idx = 0;
@@ -53,9 +62,11 @@ public class MusicEventHandler : MonoBehaviour
                 newEvent.targetEnemyIndex = 3;
             else if (input.Contains("(4)"))
                 newEvent.targetEnemyIndex = 4;
-
+            newEvent.attack = attackList[attackIndex];
+            attackIndex++;
             events.Enqueue(newEvent);
         }
+
     }
 
     // Update is called once per frame
@@ -64,11 +75,11 @@ public class MusicEventHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P) && !audioSource.isPlaying)
         {
             audioSource.Play();
-            Debug.Log("number of events is " + events.Count);
+            //Debug.Log("number of events is " + events.Count);
             timeMusicStart = Time.time;
             if(events.Count > 0)
                 StartCoroutine(DelayTriggerEvent());
-            Debug.Log("Done");
+            //Debug.Log("Done");
         }
     }
 
@@ -88,7 +99,7 @@ public class MusicEventHandler : MonoBehaviour
             }
             else
             {
-                Debug.Log("Triggering event " + e.eventIndex + " enemy" + e.targetEnemyIndex + " " + e.hitLocation + " for " + e.span + " seconds");
+                //Debug.Log("Triggering event " + e.eventIndex + " enemy" + e.targetEnemyIndex + " " + e.hitLocation + " for " + e.span + " seconds");
                 GameObject target = null;
                 // enable dots
                 switch (e.targetEnemyIndex)
@@ -110,7 +121,7 @@ public class MusicEventHandler : MonoBehaviour
                 }
                 if(target != null)
                 {
-                    target.GetComponent<Parts>().ActivateDotAtPart(e.hitLocation, e.span);
+                    target.GetComponent<Parts>().ActivateDotAtPart(e.hitLocation, e.span, e.attack);
                 }
                 // switch ground material
                 floor.GetComponent<MeshRenderer>().material = mat[e.eventIndex % 3];
@@ -130,4 +141,5 @@ public class MusicEvent
     public string hitLocation;
     public int targetEnemyIndex;
     public float span;
+    public string attack;
 }

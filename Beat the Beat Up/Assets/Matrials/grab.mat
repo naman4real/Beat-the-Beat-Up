@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: body
+  m_Name: grab
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -73,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0.87729645, a: 1}
-    - _EmissionColor: {r: 2.701666, g: 0, b: 2.0227134, a: 1}
+    - _Color: {r: 0.026387917, g: 0.6037736, b: 0, a: 1}
+    - _EmissionColor: {r: 0.015739474, g: 0.32075477, b: 0, a: 1}

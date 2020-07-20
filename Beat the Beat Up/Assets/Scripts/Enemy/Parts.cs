@@ -15,6 +15,7 @@ public class Parts : MonoBehaviour
     [SerializeField] GameObject LeftHead;
     [SerializeField] GameObject RightArm;
     [SerializeField] GameObject RightHand;
+    [SerializeField] Material slapMat, grabMat, punchMat;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class Parts : MonoBehaviour
         
     }
 
-    public void ActivateDotAtPart(string part, float span)
+    public void ActivateDotAtPart(string part, float span, string attack)
     {
         if (span <= 0) return;
 
@@ -72,6 +73,14 @@ public class Parts : MonoBehaviour
 
         if(toActivate != null)
         {
+            Debug.Log(attack+""+attack.Length);
+            if (attack == "Slap")
+                toActivate.GetComponent<MeshRenderer>().material = slapMat;
+            else if (attack == "Punch")
+                toActivate.GetComponent<MeshRenderer>().material = punchMat;
+            else if (attack == "Grab")
+                toActivate.GetComponent<MeshRenderer>().material = grabMat;
+            Debug.Log(toActivate.GetComponent<MeshRenderer>().material.name);
             toActivate.GetComponent<Dot>().ActivateDot(span);
         }
     }
