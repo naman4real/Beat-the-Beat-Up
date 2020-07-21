@@ -1,15 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using Valve.VR;
 
 public class MusicEventHandler : MonoBehaviour
 {
     private AudioSource audioSource;
-    private string[] dotPositionList = {"Right Stomach","Mid Stomach","Left Stomach", "Chest","Left Arm",
-        "Left Hand", "Right Head", "Mid Head", "Left Head", "Right Arm", "Right Hand" };
-
     [SerializeField] GameObject enemy1;
     [SerializeField] GameObject enemy2;
     [SerializeField] GameObject enemy3;
@@ -19,61 +17,38 @@ public class MusicEventHandler : MonoBehaviour
 
     Queue<MusicEvent> events;
     float timeMusicStart;
+    bool isPlaying;
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         events = new Queue<MusicEvent>();
+        isPlaying = false;
 
-        string path = "Assets/Resources/test.txt";
-        string path1 = "Assets/Resources/attacks.txt";
-
-        StreamReader reader = new StreamReader(path);
-        StreamReader reader1 = new StreamReader(path1);
-
-        string[] content = File.ReadAllLines(path);
-        string[] attackList = File.ReadAllLines(path1);
-
-        int attackIndex = 0;
-
-
-
-        int idx = 0;
-        foreach(string input in content)
+        string eventSource = "Assets/Resources/events.csv";
+        CsvReader csv = new CsvReader(eventSource);
+        while(csv.Read())
         {
-            MusicEvent newEvent = new MusicEvent();
-            newEvent.eventIndex = idx++;
-            newEvent.span = 2.0f;
-            // set timing
-            var minutes = int.Parse(input[6].ToString());
-            var seconds = int.Parse(input[8].ToString()) * 10 + int.Parse(input[9].ToString());
-            var miliSeconds = int.Parse(input[11].ToString()) * 100 + int.Parse(input[12].ToString()) * 10;
-            newEvent.timing = minutes * 60 + seconds + miliSeconds / 1000;
-
-            // set hit location
-            newEvent.hitLocation = input.Substring(20, input.Length - 24);
-
-            // set target enemy
-            if (input.Contains("(1)"))
-                newEvent.targetEnemyIndex = 1;
-            else if (input.Contains("(2)"))
-                newEvent.targetEnemyIndex = 2;
-            else if (input.Contains("(3)"))
-                newEvent.targetEnemyIndex = 3;
-            else if (input.Contains("(4)"))
-                newEvent.targetEnemyIndex = 4;
-            newEvent.attack = attackList[attackIndex];
-            attackIndex++;
+            MusicEvent newEvent = new MusicEvent
+            {
+                eventIndex = int.Parse(csv.GetFieldOrEmpty("Event Number")),
+                span = 2.0f,
+                hitLocation = csv.GetFieldOrEmpty("Hit Location"),
+                targetEnemyIndex = int.Parse(csv.GetFieldOrEmpty("Targetted Enemy")),
+                attack = csv.GetFieldOrEmpty("Hit Type"),
+            };
+            int[] timeArray = csv.GetFieldOrEmpty("Timing").Split(':').Select(int.Parse).ToArray();
+            newEvent.timing = timeArray[0] * 60 + timeArray[1] + timeArray[2] / 100.0f;
             events.Enqueue(newEvent);
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && !audioSource.isPlaying)
+        if (Input.GetKeyDown(KeyCode.P) && !isPlaying)
         {
+            isPlaying = true;
             audioSource.Play();
             //Debug.Log("number of events is " + events.Count);
             timeMusicStart = Time.time;
@@ -99,6 +74,7 @@ public class MusicEventHandler : MonoBehaviour
             }
             else
             {
+                Debug.Log(e.eventIndex + " " + e.timing + " " + e.hitLocation + " " + e.targetEnemyIndex + " " + e.attack);
                 //Debug.Log("Triggering event " + e.eventIndex + " enemy" + e.targetEnemyIndex + " " + e.hitLocation + " for " + e.span + " seconds");
                 GameObject target = null;
                 // enable dots

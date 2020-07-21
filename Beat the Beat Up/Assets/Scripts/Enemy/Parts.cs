@@ -73,14 +73,12 @@ public class Parts : MonoBehaviour
 
         if(toActivate != null)
         {
-            Debug.Log(attack+""+attack.Length);
             if (attack == "Slap")
                 toActivate.GetComponent<MeshRenderer>().material = slapMat;
             else if (attack == "Punch")
                 toActivate.GetComponent<MeshRenderer>().material = punchMat;
             else if (attack == "Grab")
                 toActivate.GetComponent<MeshRenderer>().material = grabMat;
-            Debug.Log(toActivate.GetComponent<MeshRenderer>().material.name);
             toActivate.GetComponent<Dot>().ActivateDot(span);
         }
     }
