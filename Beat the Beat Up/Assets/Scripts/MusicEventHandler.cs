@@ -97,7 +97,7 @@ public class MusicEventHandler : MonoBehaviour
                 }
                 if(target != null)
                 {
-                    target.GetComponent<Parts>().ActivateDotAtPart(e.hitLocation, e.span, e.attack);
+                    target.GetComponent<PartDots>().ActivateDotAtPart(e.hitLocation, e.span, e.attack);
                 }
                 // switch ground material
                 floor.GetComponent<MeshRenderer>().material = mat[e.eventIndex % 3];

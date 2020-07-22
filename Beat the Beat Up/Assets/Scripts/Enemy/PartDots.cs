@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Parts : MonoBehaviour
+public class PartDots : MonoBehaviour
 {
     [SerializeField] GameObject RightStomach;
     [SerializeField] GameObject MidStomach;
