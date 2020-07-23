@@ -2949,7 +2949,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6736697259518020583}
   - component: {fileID: 489035646681431272}
-  - component: {fileID: 1162112518920975761}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -3086,25 +3085,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.01564306, y: -0.054367393, z: 0.09103121}
     m_Extent: {x: 0.45871842, y: 0.7698052, z: 0.3502782}
   m_DirtyAABB: 0
---- !u!114 &1162112518920975761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6278005377106980830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90fbcdd95ce71914da81d6e6a80c63ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highlightColor:
-    serializedVersion: 2
-    rgba: 4278190335
-  regularColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  smr: {fileID: 0}
 --- !u!1 &6465216021856328036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,6 +3254,7 @@ GameObject:
   - component: {fileID: 7134064904931540816}
   - component: {fileID: 7640641750279540653}
   - component: {fileID: 5763735790985309790}
+  - component: {fileID: 2768479996536909815}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -3347,9 +3328,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c92a2e0debcf6449789568d6f7c0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 2
   gutTexture: {fileID: 2800000, guid: 97d6a3a5d3f097743bd073e885732815, type: 3}
   originalTexture: {fileID: 2800000, guid: d19a4b16eeaed21468bf78f061e7c05c, type: 3}
   playerCamera: {fileID: 0}
+  root: {fileID: 5953970971674357698}
+  head: {fileID: 4133506826725010355}
+  neck: {fileID: 4911779980991651027}
+  spine: {fileID: 5947056983667534436}
+  spine2: {fileID: 5329764026012084275}
 --- !u!114 &7134064904931540816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3409,6 +3396,30 @@ MonoBehaviour:
   LeftHead: {fileID: 1162112519273705109}
   RightArm: {fileID: 1162112518145232345}
   RightHand: {fileID: 1162112518435497970}
+  slapMat: {fileID: 0}
+  grabMat: {fileID: 0}
+  punchMat: {fileID: 0}
+--- !u!114 &2768479996536909815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7134064904931540823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fbcdd95ce71914da81d6e6a80c63ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallOffDist: 0.1
+  highlightColor:
+    serializedVersion: 2
+    rgba: 4278190335
+  regularColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  smr: {fileID: 0}
+  bone: {fileID: 0}
 --- !u!1 &7149742569434336050
 GameObject:
   m_ObjectHideFlags: 0

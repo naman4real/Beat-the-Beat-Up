@@ -2,19 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.XR;
 
 [RequireComponent(typeof(Animator))]
 public class isHit : MonoBehaviour
 {
-
-
+    [SerializeField] int index;
     [SerializeField] private Texture gutTexture;
     [SerializeField] private Texture originalTexture;
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private Transform root, head, neck, spine, spine2;
+    BoneHighlighter boneHighlighter;
     private Animator anim;
     private bool gut, face = false;
-     
+    Renderer bodyRenderer;
+    Renderer topRenderer;
 
     Mesh mesh;
     Vector3[] vertices;
@@ -31,7 +33,9 @@ public class isHit : MonoBehaviour
         vertices = mesh.vertices;
         colors = new Color[vertices.Length];
         dir = transform.forward;
-
+        boneHighlighter = GetComponent<BoneHighlighter>();
+        topRenderer = transform.Find("Tops").gameObject.GetComponent<Renderer>();
+        bodyRenderer = transform.Find("Body").gameObject.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -44,7 +48,7 @@ public class isHit : MonoBehaviour
             transform.position=Vector3.MoveTowards(transform.position, lookSpot,2.5f*Time.deltaTime);
         }
         else
-        {           
+        {
             anim.SetBool("run", false);
             StartCoroutine(waitToChangeDirction());
         }
@@ -53,15 +57,22 @@ public class isHit : MonoBehaviour
         {
             face = true;
             anim.SetTrigger("jawHit1");
-            BoneHighlighter.bone = GameObject.Find("mixamorig:Head").transform;
-            StartCoroutine(wait());
+            bodyRenderer.material.SetInt("_PartIndex", index);
 
+
+            StartCoroutine(wait());
         }
         else if (Input.GetMouseButtonDown(1))
         {
             gut = true;
             anim.SetTrigger("gutHit");
-            transform.Find("Tops").GetComponent<SkinnedMeshRenderer>().material.mainTexture = gutTexture;
+
+            topRenderer.material.SetInt("_PartIndex", index);
+            // BoneHighlighter.bone = GameObject.Find("mixamorig:"+ boneToHighlight).transform;
+            // boneHighlighter.HighlightWithinDistance(highlightPoint.transform.position, root);
+
+
+            // transform.Find("Tops").GetComponent<SkinnedMeshRenderer>().material.mainTexture = gutTexture;
             StartCoroutine(wait());
 
         }
@@ -77,13 +88,16 @@ public class isHit : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         if (face)
         {
-            BoneHighlighter.bone = null;
+            bodyRenderer.material.SetInt("_PartIndex", -1);
+            boneHighlighter.bone = null;
             face = false;
 
         }
         else if (gut)
         {
-            transform.Find("Tops").GetComponent<SkinnedMeshRenderer>().material.mainTexture = originalTexture;
+            topRenderer.material.SetInt("_PartIndex", -1);
+            // transform.Find("Tops").GetComponent<SkinnedMeshRenderer>().material.mainTexture = originalTexture;
+            boneHighlighter.bone = null;
             gut = false;
         }
     }
