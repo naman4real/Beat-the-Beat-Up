@@ -11,27 +11,27 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Bodymat
-    second: {fileID: 2100000, guid: 595f881094688504f9c4414a53d14c03, type: 2}
+    second: {fileID: 2100000, guid: e1a26e7602c0d614dac09c45fe7e44e9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Bottommat
-    second: {fileID: 2100000, guid: 595f881094688504f9c4414a53d14c03, type: 2}
+    second: {fileID: 2100000, guid: 3dde6f0de99fb1a468ec77a0eb800285, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Hairmat
-    second: {fileID: 2100000, guid: 595f881094688504f9c4414a53d14c03, type: 2}
+    second: {fileID: 2100000, guid: 016a913887eac9f41b289ecc51558bd5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Shoesmat
-    second: {fileID: 2100000, guid: 595f881094688504f9c4414a53d14c03, type: 2}
+    second: {fileID: 2100000, guid: afc0756a8d0beec43a4b7c8203b3afed, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Topmat
-    second: {fileID: 2100000, guid: 595f881094688504f9c4414a53d14c03, type: 2}
+    second: {fileID: 2100000, guid: 07c5d5b14f3900a45842f70be0460908, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
@@ -199,12 +199,12 @@ ModelImporter:
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []

@@ -11,7 +11,7 @@ public class BoneHighlighter : MonoBehaviour
 	public SkinnedMeshRenderer smr;
 
 	// Just for sake of demonstration
-	public Transform bone;
+	public static Transform bone;
 	private Transform prevBone;
 
 
@@ -30,7 +30,7 @@ public class BoneHighlighter : MonoBehaviour
 	}
 
 	public void HighlightWithinDistance(Vector3 pos, Transform closestBone)
-    {
+	{
 		int idx = GetBoneIndex(closestBone);
 		Mesh mesh = smr.sharedMesh;
 		// var mesh = smr.sharedMesh;
@@ -41,20 +41,20 @@ public class BoneHighlighter : MonoBehaviour
 		for (int i = 0; i < colors.Length; ++i)
 		{
 			var dist = fallOffDist;
-			if(weights[i].boneIndex0 == idx ||
+			if (weights[i].boneIndex0 == idx ||
 				weights[i].boneIndex1 == idx ||
 				weights[i].boneIndex2 == idx ||
 				weights[i].boneIndex3 == idx)
-            {
+			{
 				dist = Vector3.Distance(transform.Find("Tops").TransformPoint(vertices[i]), pos);
 			}
-			if(dist < fallOffDist)
-            {
+			if (dist < fallOffDist)
+			{
 				colors[i] = Color.red;
 				Debug.Log("center: " + pos + "; vertex: " + transform.Find("Tops").TransformPoint(vertices[i]) + "; dist: " + dist);
-            }
-            else
-            {
+			}
+			else
+			{
 				colors[i] = regularColor;
 			}
 			// colors[i] = Color32.Lerp(highlightColor, regularColor, dist/fallOffDist);
@@ -71,7 +71,6 @@ public class BoneHighlighter : MonoBehaviour
 		var mesh = smr.sharedMesh;
 		var weights = mesh.boneWeights;
 		var colors = new Color32[weights.Length];
-		Debug.Log(idx);
 		for (int i = 0; i < colors.Length; ++i)
 		{
 			float sum = 0;
@@ -85,7 +84,7 @@ public class BoneHighlighter : MonoBehaviour
 				sum += weights[i].weight3;
 
 			colors[i] = Color32.Lerp(regularColor, highlightColor, sum);
-		} 
+		}
 
 		mesh.colors32 = colors;
 

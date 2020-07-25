@@ -11,7 +11,7 @@ public class isHit : MonoBehaviour
     [SerializeField] private Texture gutTexture;
     [SerializeField] private Texture originalTexture;
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private Transform root, head, neck, spine, spine2;
+    //[SerializeField] private Transform root, head, neck, spine, spine2;
     BoneHighlighter boneHighlighter;
     private Animator anim;
     private bool gut, face = false;
@@ -40,12 +40,12 @@ public class isHit : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {    
+    {
         if (Input.GetKey(KeyCode.W))
         {
             lookSpot = new Vector3(playerCamera.transform.position.x, 0f, playerCamera.transform.position.z);
             anim.SetBool("run", true);
-            transform.position=Vector3.MoveTowards(transform.position, lookSpot,2.5f*Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, lookSpot, 2.5f * Time.deltaTime);
         }
         else
         {
@@ -89,7 +89,7 @@ public class isHit : MonoBehaviour
         if (face)
         {
             bodyRenderer.material.SetInt("_PartIndex", -1);
-            boneHighlighter.bone = null;
+            BoneHighlighter.bone = null;
             face = false;
 
         }
@@ -97,7 +97,7 @@ public class isHit : MonoBehaviour
         {
             topRenderer.material.SetInt("_PartIndex", -1);
             // transform.Find("Tops").GetComponent<SkinnedMeshRenderer>().material.mainTexture = originalTexture;
-            boneHighlighter.bone = null;
+            BoneHighlighter.bone = null;
             gut = false;
         }
     }

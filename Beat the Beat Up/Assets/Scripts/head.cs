@@ -10,12 +10,8 @@ public class head : MonoBehaviour
     [SerializeField] private Text timeText;
     private string performance;
     private string time;
-    BoneHighlighter boneHighlighter;
 
-    private void Start()
-    {
-        boneHighlighter = transform.root.GetComponent<BoneHighlighter>();
-    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -24,7 +20,7 @@ public class head : MonoBehaviour
         {
             var dist = Vector3.Distance(spawnDots.go.transform.position, collision.collider.transform.position);
             anim.SetTrigger("jawHit1");
-            boneHighlighter.bone = GameObject.Find("mixamorig:Head").transform;
+            BoneHighlighter.bone = GameObject.Find("mixamorig:Head").transform;
             StartCoroutine(wait());
 
 
@@ -64,7 +60,7 @@ public class head : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
-        boneHighlighter.bone = null;
+        BoneHighlighter.bone = null;
         spawnDots.spawn = true;
 
     }
