@@ -50,7 +50,7 @@ public class MusicEventHandler : MonoBehaviour
         {
             isPlaying = true;
             audioSource.Play();
-            //Debug.Log("number of events is " + events.Count);
+            Debug.Log("number of events is " + events.Count);
             timeMusicStart = Time.time;
             if(events.Count > 0)
                 StartCoroutine(DelayTriggerEvent());
