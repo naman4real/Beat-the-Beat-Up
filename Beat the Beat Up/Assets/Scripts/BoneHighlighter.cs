@@ -3,117 +3,118 @@ using System.Collections;
 
 public class BoneHighlighter : MonoBehaviour
 {
-	[SerializeField] float fallOffDist;
-
 	public Color32 highlightColor = Color.red;
 	public Color32 regularColor = Color.white;
 
-	public SkinnedMeshRenderer smr;
+    Renderer bodyRenderer;
+    Renderer topRenderer;
 
-	// Just for sake of demonstration
-	public static Transform bone;
-	private Transform prevBone;
+    float bodyTime;
+    float topTime;
+    
+    private void Start()
+    {
+        topRenderer = transform.Find("Tops").gameObject.GetComponent<Renderer>();
+        bodyRenderer = transform.Find("Body").gameObject.GetComponent<Renderer>();
+    }
 
+    private void Update()
+    {
+        bodyTime -= Time.deltaTime;
+        if(bodyTime <= 0)
+        {
+            bodyRenderer.material.SetInt("_PartIndex", -1);
+            bodyTime = 0;
+        }
 
-	// Find bone index given bone transform
-	int GetBoneIndex(Transform bone)
-	{
-		Debug.Assert(smr != null);
-		var bones = smr.bones;
+        topTime -= Time.deltaTime;
+        if (topTime <= 0)
+        {
+            topRenderer.material.SetInt("_PartIndex", -1);
+            topTime = 0;
+        }
+    }
 
-		for (int i = 0; i < bones.Length; ++i)
-		{
-			if (bones[i] == bone) return i;
-		}
+    /*-------------------
+    0 : right - stomach
+    1 : mid - stomach
+    2 : left - stomach
+    3 : chest
+    4 : left - arm
+    5 : left - hand
+    6 : right - head
+    7 : mid - head
+    8 : left - head
+    9 : right - arm
+    10 : right - hand
+    11 : default
+    -------------------*/
 
-		return -1;
-	}
-
-	public void HighlightWithinDistance(Vector3 pos, Transform closestBone)
-	{
-		int idx = GetBoneIndex(closestBone);
-		Mesh mesh = smr.sharedMesh;
-		// var mesh = smr.sharedMesh;
-		var weights = mesh.boneWeights;
-		var colors = new Color32[weights.Length];
-		var vertices = mesh.vertices;
-
-		for (int i = 0; i < colors.Length; ++i)
-		{
-			var dist = fallOffDist;
-			if (weights[i].boneIndex0 == idx ||
-				weights[i].boneIndex1 == idx ||
-				weights[i].boneIndex2 == idx ||
-				weights[i].boneIndex3 == idx)
-			{
-				dist = Vector3.Distance(transform.Find("Tops").TransformPoint(vertices[i]), pos);
-			}
-			if (dist < fallOffDist)
-			{
-				colors[i] = Color.red;
-				Debug.Log("center: " + pos + "; vertex: " + transform.Find("Tops").TransformPoint(vertices[i]) + "; dist: " + dist);
-			}
-			else
-			{
-				colors[i] = regularColor;
-			}
-			// colors[i] = Color32.Lerp(highlightColor, regularColor, dist/fallOffDist);
-		}
-
-		mesh.colors32 = colors;
-	}
-
-	// Change vertex colors highlighting given bone
-	void Highlight(Transform bone)
-	{
-		Debug.Assert(smr != null);
-		var idx = GetBoneIndex(bone);
-		var mesh = smr.sharedMesh;
-		var weights = mesh.boneWeights;
-		var colors = new Color32[weights.Length];
-		for (int i = 0; i < colors.Length; ++i)
-		{
-			float sum = 0;
-			if (weights[i].boneIndex0 == idx && weights[i].weight0 > 0)
-				sum += weights[i].weight0;
-			if (weights[i].boneIndex1 == idx && weights[i].weight1 > 0)
-				sum += weights[i].weight1;
-			if (weights[i].boneIndex2 == idx && weights[i].weight2 > 0)
-				sum += weights[i].weight2;
-			if (weights[i].boneIndex3 == idx && weights[i].weight3 > 0)
-				sum += weights[i].weight3;
-
-			colors[i] = Color32.Lerp(regularColor, highlightColor, sum);
-		}
-
-		mesh.colors32 = colors;
-
-	}
-
-	void Start()
-	{
-		// If not explicitly specified SkinnedMeshRenderer try to find one
-		if (smr == null) smr = transform.Find("Tops").GetComponent<SkinnedMeshRenderer>();
-		// SkinnedMeshRenderer has only shared mesh. We should not modify it.
-		// So we make a copy on startup, and work with it.
-		// smr.sharedMesh = (Mesh)Instantiate(smr.sharedMesh);
-		Highlight(bone);
-	}
-
-	void Update()
-	{
-		//if (Input.GetMouseButton(0))
-		//{
-		//	RaycastHit hit;
-		//	if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
-		//		bone = hit.collider.transform;
-		//	Debug.Log(bone.name + " bone");
-		//}
-		if (prevBone != bone)
-		{
-			// User selected different bone
-			prevBone = bone;
-			Highlight(bone);
-		}
-	}
+    public void HighlightPart(string part, float span)
+    {
+        bool body = false, top = false;
+        int idx;
+        switch(part)
+        {
+            case "Right Stomach":
+                idx = 0;
+                top = true;
+                break;
+            case "Mid Stomach":
+                top = true;
+                idx = 1;
+                break;
+            case "Left Stomach":
+                top = true;
+                idx = 2;
+                break;
+            case "Chest":
+                top = true;
+                idx = 3;
+                break;
+            case "Left Arm":
+                top = true;
+                body = true;
+                idx = 4;
+                break;
+            case "Left Hand":
+                body = true;
+                idx = 5;
+                break;
+            case "Right Head":
+                body = true;
+                idx = 6;
+                break;
+            case "Mid Head":
+                body = true;
+                idx = 7;
+                break;
+            case "Left Head":
+                body = true;
+                idx = 8;
+                break;
+            case "Right Arm":
+                body = true;
+                top = true;
+                idx = 9;
+                break;
+            case "Right Hand":
+                body = true;
+                idx = 10;
+                break;
+            default:
+                idx = -1;
+                break;
+        }
+        if(body)
+        {
+            bodyTime = span;
+            bodyRenderer.material.SetInt("_PartIndex", idx);
+        }
+        if(top)
+        {
+            topTime = span;
+            topRenderer.material.SetInt("_PartIndex", idx);
+        }
+    }
 }

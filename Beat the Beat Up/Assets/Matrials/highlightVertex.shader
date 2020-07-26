@@ -108,7 +108,7 @@
 
             // if vertex index matches the one to highlight
             if (_PartIndex == GetPartFromIndex(partInfo))
-                c *= float4(1, 0, 0, 1);
+                c = float4(1, 0, 0, 1);
 
             o.Albedo = c.rgb * IN.vertexColor; // Combine normal color with the vertex color
             // Metallic and smoothness come from slider variables
