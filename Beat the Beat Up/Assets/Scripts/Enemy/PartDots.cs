@@ -79,6 +79,8 @@ public class PartDots : MonoBehaviour
                 toActivate.GetComponent<MeshRenderer>().material = punchMat;
             else if (attack == "Grab")
                 toActivate.GetComponent<MeshRenderer>().material = grabMat;
+                transform.gameObject.GetComponent<Animator>().enabled = false;
+
             toActivate.GetComponent<Dot>().ActivateDot(span);
         }
     }
