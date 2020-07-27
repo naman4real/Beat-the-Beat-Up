@@ -97,7 +97,7 @@ public class MusicEventHandler : MonoBehaviour
                 }
                 if(target != null)
                 {
-                    target.GetComponent<PartDots>().ActivateDotAtPart(e.hitLocation, e.span, e.attack);
+                    HighlightEnemyPart(target, e);
                 }
                 // switch ground material
                 floor.GetComponent<MeshRenderer>().material = mat[e.eventIndex % 3];
@@ -107,6 +107,13 @@ public class MusicEventHandler : MonoBehaviour
         }
         if(events.Count > 0)
             StartCoroutine(DelayTriggerEvent());
+    }
+    public void HighlightEnemyPart(GameObject target, MusicEvent e)
+    {
+        // highlight part
+        target.GetComponent<BoneHighlighter>().HighlightPart(e.hitLocation, e.span);
+        // highlight dot
+        target.GetComponent<PartDots>().ActivateDotAtPart(e.hitLocation, e.span, e.attack);
     }
 }
 

@@ -20,7 +20,6 @@ public class head : MonoBehaviour
         {
             var dist = Vector3.Distance(spawnDots.go.transform.position, collision.collider.transform.position);
             anim.SetTrigger("jawHit1");
-            BoneHighlighter.bone = GameObject.Find("mixamorig:Head").transform;
             StartCoroutine(wait());
 
 
@@ -59,8 +58,6 @@ public class head : MonoBehaviour
     IEnumerator wait()
     {
         yield return new WaitForSeconds(1.5f);
-
-        BoneHighlighter.bone = null;
         spawnDots.spawn = true;
 
     }
