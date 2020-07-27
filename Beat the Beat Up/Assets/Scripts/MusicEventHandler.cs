@@ -74,7 +74,7 @@ public class MusicEventHandler : MonoBehaviour
             }
             else
             {
-                Debug.Log(e.eventIndex + " " + e.timing + " " + e.hitLocation + " " + e.targetEnemyIndex + " " + e.attack);
+                //Debug.Log(e.eventIndex + " " + e.timing + " " + e.hitLocation + " " + e.targetEnemyIndex + " " + e.attack);
                 //Debug.Log("Triggering event " + e.eventIndex + " enemy" + e.targetEnemyIndex + " " + e.hitLocation + " for " + e.span + " seconds");
                 GameObject target = null;
                 // enable dots

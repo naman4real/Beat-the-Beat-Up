@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
 public class PartDots : MonoBehaviour
 {
-    [SerializeField] GameObject RightStomach;
+    [SerializeField] GameObject RightStomach;     
     [SerializeField] GameObject MidStomach;
     [SerializeField] GameObject LeftStomach;
     [SerializeField] GameObject Chest;
@@ -15,14 +16,51 @@ public class PartDots : MonoBehaviour
     [SerializeField] GameObject LeftHead;
     [SerializeField] GameObject RightArm;
     [SerializeField] GameObject RightHand;
+
     [SerializeField] Material slapMat, grabMat, punchMat;
 
-    Rigidbody rb;
+    [SerializeField] GameObject Spine;    // not bound to any attackable bodypart
+    [SerializeField] GameObject LeftArmRagdoll;
+    [SerializeField] GameObject RightArmRagdoll;
+    [SerializeField] GameObject HeadRagdoll;
+    [SerializeField] GameObject LeftHandRagdoll;
+    [SerializeField] GameObject RightHandRagdoll;
+    [SerializeField] GameObject LeftForearm;    // not bound to any attackable bodypart
+    [SerializeField] GameObject RightForearm;   // not bound to any attackable bodypart
+    [SerializeField] GameObject Hips;   
+
+
+
+    GameObject[] bodyParts;
+    GameObject bodyPartToThrow = null;
+
+    Dictionary<GameObject, GameObject> RagdollMapping;
+
+
+    Rigidbody rbSpine,rbLeftForearm,rbRightForearm;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = transform.Find("mixamorig:Hips").GetComponent<Rigidbody>();
+        bodyParts = new GameObject[] {RightStomach, MidStomach, LeftStomach, Chest, LeftArm,
+                                      LeftHand, RightHead, MidHead, LeftHead, RightArm, RightHand};
+
+        rbSpine = Spine.GetComponent<Rigidbody>();
+        rbLeftForearm = LeftForearm.GetComponent<Rigidbody>();
+        rbRightForearm = RightForearm.GetComponent<Rigidbody>();
+        
+        RagdollMapping = new Dictionary<GameObject, GameObject>();
+        RagdollMapping.Add(RightStomach, Hips);
+        RagdollMapping.Add(MidStomach, Hips);
+        RagdollMapping.Add(LeftStomach, Hips);
+        RagdollMapping.Add(Chest, Hips);
+        RagdollMapping.Add(LeftArm, LeftArmRagdoll);
+        RagdollMapping.Add(LeftHand, LeftHandRagdoll);
+        RagdollMapping.Add(RightHead, HeadRagdoll);
+        RagdollMapping.Add(MidHead, HeadRagdoll);
+        RagdollMapping.Add(LeftHead, HeadRagdoll);
+        RagdollMapping.Add(RightArm, RightArmRagdoll);
+        RagdollMapping.Add(RightHand, RightHandRagdoll);
     }
 
     // Update is called once per frame
@@ -85,24 +123,35 @@ public class PartDots : MonoBehaviour
             }
             else if (attack == "Grab")
             {
+                bodyPartToThrow = toActivate;
+
                 toActivate.GetComponent<MeshRenderer>().material = grabMat;
+                rbLeftForearm.isKinematic = false;
+                rbRightForearm.isKinematic = false;
+                rbSpine.isKinematic = false;
+                
+                foreach (var bodyPart in bodyParts)
+                {
+                    if (RagdollMapping[bodyPart] != RagdollMapping[toActivate])
+                        RagdollMapping[bodyPart].GetComponent<Rigidbody>().isKinematic = false;
+                }
+
+
+               
+
                 transform.gameObject.GetComponent<Animator>().enabled = false;
+
             }
             else if (attack == "Throw")
             {
-                rb.isKinematic = false;
-                rb.AddForce((transform.up - 1.2f * transform.forward) * 100f, ForceMode.Impulse);
-                StartCoroutine(stopForce());
+                Debug.Log("throw ...... "+bodyPartToThrow + " " + RagdollMapping[bodyPartToThrow]);
+                RagdollMapping[bodyPartToThrow].GetComponent<Rigidbody>().isKinematic = false;
+                bodyPartToThrow = null;
+                rbSpine.AddForce((transform.up - 1.2f * transform.forward) * 100f, ForceMode.Impulse);
             }
 
             toActivate.GetComponent<Dot>().ActivateDot(span);
         }
-    }
-
-    IEnumerator stopForce()
-    {
-        yield return new WaitForSeconds(1f);
-
     }
     
 }

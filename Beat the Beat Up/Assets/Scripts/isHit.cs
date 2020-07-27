@@ -96,7 +96,6 @@ public class isHit : MonoBehaviour
         else if (gut)
         {
             topRenderer.material.SetInt("_PartIndex", -1);
-            // transform.Find("Tops").GetComponent<SkinnedMeshRenderer>().material.mainTexture = originalTexture;
             BoneHighlighter.bone = null;
             gut = false;
         }
