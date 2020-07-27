@@ -19,14 +19,14 @@ public class Dot : MonoBehaviour
             if(activeTime <= 0)
             {
                 activeTime = 0;
-                gameObject.SetActive(false);
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
             }
         }
     }
 
     public void ActivateDot(float spanSec)
     {
-        gameObject.SetActive(true);
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
         //Debug.Log("Setting ActiveTime to " + spanSec);
         activeTime = spanSec;
     }
