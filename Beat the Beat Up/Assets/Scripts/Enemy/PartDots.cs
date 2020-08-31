@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PartDots : MonoBehaviour
 {
@@ -27,18 +29,24 @@ public class PartDots : MonoBehaviour
     [SerializeField] GameObject RightHandRagdoll;
     [SerializeField] GameObject LeftForearm;    // not bound to any attackable bodypart
     [SerializeField] GameObject RightForearm;   // not bound to any attackable bodypart
-    [SerializeField] GameObject Hips;   
+    [SerializeField] GameObject Hips;
+
+    [SerializeField] GameObject leftHand;
+    [SerializeField] GameObject rightHand;
+
+    GameObject ragdollPart = null;
 
 
 
     GameObject[] bodyParts;
+    [SerializeField] GameObject[] Legs;
     GameObject bodyPartToThrow = null;
 
     Dictionary<GameObject, GameObject> RagdollMapping;
 
 
     Rigidbody rbSpine,rbLeftForearm,rbRightForearm;
-
+    int follow = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,12 +69,6 @@ public class PartDots : MonoBehaviour
         RagdollMapping.Add(LeftHead, HeadRagdoll);
         RagdollMapping.Add(RightArm, RightArmRagdoll);
         RagdollMapping.Add(RightHand, RightHandRagdoll);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ActivateDotAtPart(string part, float span, string attack)
@@ -144,7 +146,6 @@ public class PartDots : MonoBehaviour
             }
             else if (attack == "Throw")
             {
-                Debug.Log("throw ...... "+bodyPartToThrow + " " + RagdollMapping[bodyPartToThrow]);
                 RagdollMapping[bodyPartToThrow].GetComponent<Rigidbody>().isKinematic = false;
                 bodyPartToThrow = null;
                 rbSpine.AddForce((transform.up - 1.2f * transform.forward) * 100f, ForceMode.Impulse);
@@ -153,5 +154,44 @@ public class PartDots : MonoBehaviour
             toActivate.GetComponent<Dot>().ActivateDot(span);
         }
     }
-    
+
+    public void grab()
+    {
+
+        //float minDistance = 100f;
+        //foreach (var bodyPart in bodyParts)
+        //{
+        //    var distance1 = Vector3.Distance(bodyPart.transform.position, leftHand.transform.position);
+        //    if (distance1 < minDistance && RagdollMapping[bodyPart]!=ragdollPart)
+        //    {
+        //        minDistance = distance1;
+        //        ragdollPart = RagdollMapping[bodyPart];
+
+        //    }
+
+        //}
+
+        ragdollPart = Hips;
+        foreach (var bodyPart in bodyParts)
+        {
+            if (RagdollMapping[bodyPart] != ragdollPart)
+                RagdollMapping[bodyPart].GetComponent<Rigidbody>().isKinematic = false;
+        }
+        rbLeftForearm.isKinematic = false;
+        rbRightForearm.isKinematic = false;
+        rbSpine.isKinematic = false;
+        transform.gameObject.GetComponent<Animator>().enabled = false;
+
+        gameObject.GetComponent<Collider>().enabled = false;
+
+        foreach (var legPart in Legs)
+            legPart.GetComponent<Collider>().enabled = true;
+    }
+
+    public void release()
+    {
+        ragdollPart.GetComponent<Rigidbody>().isKinematic = false;
+        transform.GetComponent<Rigidbody>().useGravity = true;
+    }
+
 }

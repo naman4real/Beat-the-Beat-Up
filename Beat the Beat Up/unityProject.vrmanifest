@@ -2,13 +2,13 @@
   "source": "Unity",
   "applications": [
     {
-      "app_key": "application.generated.unity.beatthebeatup.exe",
+      "app_key": "application.generated.unity.beatthebeatupman.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "D:\\Github Projects\\Beat-the-Beat-Up\\Beat the Beat Up\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\naman\\Desktop\\Beat the Beat Up Man\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
-          "name": "Beat the Beat Up [Testing]"
+          "name": "Beat the Beat Up Man [Testing]"
         }
       }
     }

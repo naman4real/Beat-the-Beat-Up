@@ -56,7 +56,7 @@ public class isHit : MonoBehaviour
             anim.SetTrigger("gutHit");
         }
 
-        transform.forward = (lookSpot - transform.position).normalized;
+        //transform.forward = (lookSpot - transform.position).normalized;
 
     }
 
@@ -66,5 +66,10 @@ public class isHit : MonoBehaviour
         lookSpot = new Vector3(playerCamera.transform.position.x - 1f, 0f, playerCamera.transform.position.z);
     }
 
+    public void log()
+    {
+        Debug.Log("held");
+        anim.enabled = false;
+    }
 
 }
