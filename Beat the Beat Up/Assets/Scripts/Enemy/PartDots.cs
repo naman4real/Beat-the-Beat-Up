@@ -69,7 +69,11 @@ public class PartDots : MonoBehaviour
         RagdollMapping.Add(LeftHead, HeadRagdoll);
         RagdollMapping.Add(RightArm, RightArmRagdoll);
         RagdollMapping.Add(RightHand, RightHandRagdoll);
+
+        //LeftArmRagdoll.transform.parent = gameObject.transform;
+        //transform.Find("mixamorig:Hips").parent = LeftArmRagdoll.transform;
     }
+
 
     public void ActivateDotAtPart(string part, float span, string attack)
     {
@@ -161,13 +165,13 @@ public class PartDots : MonoBehaviour
         //float minDistance = 100f;
         //foreach (var bodyPart in bodyParts)
         //{
-        //    var distance1 = Vector3.Distance(bodyPart.transform.position, leftHand.transform.position);
-        //    if (distance1 < minDistance && RagdollMapping[bodyPart]!=ragdollPart)
+        //    var distance1 = Vector3.Distance(bodyPart.transform.position, rightHand.transform.position);
+        //    if (distance1 < minDistance && RagdollMapping[bodyPart] != ragdollPart)
         //    {
         //        minDistance = distance1;
         //        ragdollPart = RagdollMapping[bodyPart];
 
-        //    }
+        //    } 
 
         //}
 
@@ -180,12 +184,14 @@ public class PartDots : MonoBehaviour
         rbLeftForearm.isKinematic = false;
         rbRightForearm.isKinematic = false;
         rbSpine.isKinematic = false;
+
         transform.gameObject.GetComponent<Animator>().enabled = false;
 
-        gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<Collider>().isTrigger=true;
 
         foreach (var legPart in Legs)
             legPart.GetComponent<Collider>().enabled = true;
+
     }
 
     public void release()
