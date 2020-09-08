@@ -175,6 +175,9 @@ public class PartDots : MonoBehaviour
 
         //}
 
+        // setting all the rigid bodies of the body parts' isKinemitc=false, disabling the animator and enabing leg colliders
+        
+        transform.GetComponent<Rigidbody>().isKinematic = false;
         ragdollPart = Hips;
         foreach (var bodyPart in bodyParts)
         {
@@ -190,7 +193,15 @@ public class PartDots : MonoBehaviour
         gameObject.GetComponent<Collider>().isTrigger=true;
 
         foreach (var legPart in Legs)
+        {
+            if(legPart.name == "Right Ankle Collider" || legPart.name == "Left Ankle Collider")
+                legPart.transform.parent.GetComponent<Rigidbody>().isKinematic = false;
+            else
+                legPart.GetComponent<Rigidbody>().isKinematic = false;
             legPart.GetComponent<Collider>().enabled = true;
+            
+        }
+            
 
     }
 

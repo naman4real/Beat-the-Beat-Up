@@ -1,21 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class grab : MonoBehaviour
 {
 
     bool start = false;
+    [SerializeField] GameObject enemy;
     void Update()
     {
         if (OVRGrabber.grabbed && !start)
         {
-            GameObject.Find("Enemy1").GetComponent<PartDots>().grab();
+            enemy.GetComponent<PartDots>().grab();
             start = true;
         }
         else if (!OVRGrabber.grabbed && start)
         {
-            GameObject.Find("Enemy1").GetComponent<PartDots>().release();
+            enemy.GetComponent<PartDots>().release();
             start = false;
         }
 

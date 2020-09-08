@@ -16,43 +16,43 @@ public class head : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         
-        if (collision.collider.CompareTag("hands"))
-        {
-            var dist = Vector3.Distance(spawnDots.go.transform.position, collision.collider.transform.position);
-            anim.SetTrigger("jawHit1");
-            StartCoroutine(wait());
+        //if (collision.collider.CompareTag("hands"))
+        //{
+        //    var dist = Vector3.Distance(spawnDots.go.transform.position, collision.collider.transform.position);
+        //    anim.SetTrigger("jawHit1");
+        //    StartCoroutine(wait());
 
 
-            if (spawnDots.time <= 2f)
-                time = "Perfect timing";
-            else
-                time = "Too Slow";
-
-
-
-            if (dist >= 0.3f)
-            {
-                performance = "Average";
-
-            }
-            else if (dist >= 0.2f && dist < 0.3f)
-            {
-                performance = "Good";
-
-            }
-            else
-            {
-                performance = "Excellent";
-            }
-
-            spawnDots.time = 0;
-            performanceText.text = performance;
-            timeText.text = time;
+        //    if (spawnDots.time <= 2f)
+        //        time = "Perfect timing";
+        //    else
+        //        time = "Too Slow";
 
 
 
+        //    if (dist >= 0.3f)
+        //    {
+        //        performance = "Average";
 
-        }
+        //    }
+        //    else if (dist >= 0.2f && dist < 0.3f)
+        //    {
+        //        performance = "Good";
+
+        //    }
+        //    else
+        //    {
+        //        performance = "Excellent";
+        //    }
+
+        //    spawnDots.time = 0;
+        //    performanceText.text = performance;
+        //    timeText.text = time;
+
+
+
+
+        //}
     }
 
     IEnumerator wait()

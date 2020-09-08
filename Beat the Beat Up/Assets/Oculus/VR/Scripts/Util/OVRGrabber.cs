@@ -16,6 +16,7 @@ permissions and limitations under the License.
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Allows grabbing and throwing of objects with the OVRGrabbable component on them.
@@ -37,11 +38,13 @@ public class OVRGrabber : MonoBehaviour
     [SerializeField]
     protected bool m_parentHeldObject = false;
 
-	// If true, this script will move the hand to the transform specified by m_parentTransform, using MovePosition in
-	// FixedUpdate. This allows correct physics behavior, at the cost of some latency. In this usage scenario, you
-	// should NOT parent the hand to the hand anchor.
-	// (If m_moveHandPosition is false, this script will NOT update the game object's position.
-	// The hand gameObject can simply be attached to the hand anchor, which updates position in LateUpdate,
+    [SerializeField] private Text performanceText;
+
+    // If true, this script will move the hand to the transform specified by m_parentTransform, using MovePosition in
+    // FixedUpdate. This allows correct physics behavior, at the cost of some latency. In this usage scenario, you
+    // should NOT parent the hand to the hand anchor.
+    // (If m_moveHandPosition is false, this script will NOT update the game object's position.
+    // The hand gameObject can simply be attached to the hand anchor, which updates position in LateUpdate,
     // gaining us a few ms of reduced latency.)
     [SerializeField]
     protected bool m_moveHandPosition = false;
@@ -221,15 +224,17 @@ public class OVRGrabber : MonoBehaviour
     protected void CheckForGrabOrRelease(float prevFlex)
     {
         
-        if ((m_prevFlex >= grabBegin) && (prevFlex < grabBegin))
+        if (((m_prevFlex >= grabBegin) && (prevFlex < grabBegin)) || Input.GetKeyDown(KeyCode.G))
         {
             grabbed = true;
             GrabBegin();
+            performanceText.text = grabbed.ToString();
         }
-        else if ((m_prevFlex <= grabEnd) && (prevFlex > grabEnd))
+        else if (((m_prevFlex <= grabEnd) && (prevFlex > grabEnd)) || Input.GetKeyDown(KeyCode.R))
         {
             grabbed = false;
             GrabEnd();
+            performanceText.text = grabbed.ToString();
         }
     }
 
