@@ -2,44 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class attack : MonoBehaviour
 {
 
     [SerializeField] private Animator anim;
-    private float time = 0f;    // to prevent accidental collisions
+    [SerializeField] GameObject go;
+    private float time = 0f;// to prevent accidental collisions
     private int flag = 0;
+    [SerializeField] Text root;
+    private int i = 0;
 
-   
+  
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Attackable") && time==0f)
         {
+            i += 1;
             flag = 1;
             time = 0.4f;
             Debug.Log(collider.name);
 
             if (collider.gameObject.name == "Right Stomach Collider")
-                anim.SetTrigger("rightStomach");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("rightStomach");
             else if (collider.gameObject.name == "Mid Stomach Collider")
-                anim.SetTrigger("midStomach");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("midStomach");
             else if (collider.gameObject.name == "Left Stomach Collider")
-                anim.SetTrigger("leftStomach");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("leftStomach");
             else if (collider.gameObject.name == "Right Head Collider")
-                anim.SetTrigger("rightHead");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("rightHead");
             else if (collider.gameObject.name == "Mid Head Collider")
-                anim.SetTrigger("midHead");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("midHead");
             else if (collider.gameObject.name == "Left Head Collider")
-                anim.SetTrigger("leftHead");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("leftHead");
 
             else if (collider.gameObject.name == "EXPORT_b_l_bicep") //left arm collider
-                anim.SetTrigger("leftArmPunch");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("leftArmPunch");
             else if (collider.gameObject.name == "EXPORT_b_r_bicep") //right arm collider
-                anim.SetTrigger("rightArmPunch");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("rightArmPunch");
             else if (collider.gameObject.name == "EXPORT_b_l_wrists")//left hand collider
-                anim.SetTrigger("leftHandPunch");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("leftHandPunch");
             else if (collider.gameObject.name == "EXPORT_b_r_wrists")//right hand collider
-                anim.SetTrigger("rightHandPunch");
+                collider.transform.root.GetComponent<Animator>().SetTrigger("rightHandPunch");
+            root.text = collider.transform.root.ToString() + " " + i.ToString();
         }
     }
     private void Update()
@@ -52,22 +58,25 @@ public class attack : MonoBehaviour
             flag = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            anim.SetTrigger("leftArmPunch");
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            anim.SetTrigger("rightArmPunch");
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            anim.SetTrigger("leftHandPunch");
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            anim.SetTrigger("rightHandPunch");
-        }
+
+
+
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    anim.SetTrigger("leftArmPunch");
+        //}
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    anim.SetTrigger("rightArmPunch");
+        //}
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    anim.SetTrigger("leftHandPunch");
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    anim.SetTrigger("rightHandPunch");
+        //}
     }
 
 }

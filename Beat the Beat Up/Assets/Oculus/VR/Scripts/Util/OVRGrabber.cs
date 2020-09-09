@@ -27,7 +27,7 @@ public class OVRGrabber : MonoBehaviour
     // Grip trigger thresholds for picking up objects, with some hysteresis.
     public float grabBegin = 0.55f;
     public float grabEnd = 0.35f;
-    public static bool grabbed = false;
+    public bool grabbed = false;
     bool alreadyUpdated = false;
 
     // Demonstrates parenting the held object to the hand's transform when grabbed.
@@ -76,7 +76,7 @@ public class OVRGrabber : MonoBehaviour
     protected Quaternion m_anchorOffsetRotation;
     protected Vector3 m_anchorOffsetPosition;
     protected float m_prevFlex;
-	protected OVRGrabbable m_grabbedObj = null;
+	public OVRGrabbable m_grabbedObj = null;
     protected Vector3 m_grabbedObjectPosOff;
     protected Quaternion m_grabbedObjectRotOff;
 	protected Dictionary<OVRGrabbable, int> m_grabCandidates = new Dictionary<OVRGrabbable, int>();
@@ -224,17 +224,13 @@ public class OVRGrabber : MonoBehaviour
     protected void CheckForGrabOrRelease(float prevFlex)
     {
         
-        if (((m_prevFlex >= grabBegin) && (prevFlex < grabBegin)) || Input.GetKeyDown(KeyCode.G))
+        if ((m_prevFlex >= grabBegin) && (prevFlex < grabBegin))
         {
-            grabbed = true;
             GrabBegin();
-            performanceText.text = grabbed.ToString();
         }
-        else if (((m_prevFlex <= grabEnd) && (prevFlex > grabEnd)) || Input.GetKeyDown(KeyCode.R))
+        else if ((m_prevFlex <= grabEnd) && (prevFlex > grabEnd))
         {
-            grabbed = false;
             GrabEnd();
-            performanceText.text = grabbed.ToString();
         }
     }
 
@@ -280,6 +276,7 @@ public class OVRGrabber : MonoBehaviour
 
             m_grabbedObj = closestGrabbable;
             m_grabbedObj.GrabBegin(this, closestGrabbableCollider);
+            
 
             m_lastPos = transform.position;
             m_lastRot = transform.rotation;

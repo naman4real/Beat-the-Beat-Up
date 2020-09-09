@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,13 +24,6 @@ public class ragdoll : MonoBehaviour
             rb.AddForce((1.2f*enemy1.transform.up - enemy1.transform.forward)* 200f,ForceMode.Impulse);
 
             StartCoroutine(stopForce());
-
-            enemy2.GetComponent<Animator>().enabled = false;
-
-            rb.AddForce((1.2f * enemy2.transform.up - enemy2.transform.forward) * 200f, ForceMode.Impulse);
-
-            StartCoroutine(stopForce());
-
         }
     }
     IEnumerator stopForce()
