@@ -45,6 +45,7 @@ public class MusicEventHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        OVRInput.Update();
         if ((Input.GetKeyDown(KeyCode.P) || OVRInput.GetDown(OVRInput.Button.Two)) && !isPlaying)
         {
             isPlaying = true;
