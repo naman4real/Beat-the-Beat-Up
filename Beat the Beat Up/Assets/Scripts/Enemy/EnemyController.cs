@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * currently not used, can be deleted in the future
+ */
 public class EnemyController : MonoBehaviour
 {
 
