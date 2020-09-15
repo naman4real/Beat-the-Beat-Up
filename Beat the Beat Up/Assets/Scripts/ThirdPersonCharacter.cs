@@ -132,8 +132,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters
-			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
-			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.unscaledDeltaTime);
+			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.unscaledDeltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
 			if (!m_IsGrounded)
@@ -194,7 +194,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
 			// help the character turn faster (this is in addition to root rotation in the animation)
 			float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
-			transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
+			transform.Rotate(0, m_TurnAmount * turnSpeed * Time.unscaledDeltaTime, 0);
 		}
 
 
@@ -202,9 +202,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
 			// we implement this function to override the default root motion.
 			// this allows us to modify the positional speed before it's applied.
-			if (m_IsGrounded && Time.deltaTime > 0)
+			if (m_IsGrounded && Time.unscaledDeltaTime > 0)
 			{
-				Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
+				Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.unscaledDeltaTime;
 
 				// we preserve the existing y part of the current velocity.
 				v.y = m_Rigidbody.velocity.y;
