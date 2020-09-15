@@ -5,6 +5,8 @@ using UnityEngine;
 public class Dot : MonoBehaviour
 {
     private float activeTime;
+    Color color;
+    GameObject go;
 
     // Update is called once per frame
     void Update()
@@ -18,15 +20,16 @@ public class Dot : MonoBehaviour
 
             if(activeTime <= 0)
             {
+                go.SetActive(false);
                 activeTime = 0;
-                gameObject.GetComponent<MeshRenderer>().enabled = false;
             }
         }
     }
 
-    public void ActivateDot(float spanSec)
+    public void ActivateDot(float spanSec, string attack)
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        go = transform.Find(attack).gameObject;
+        go.SetActive(true);
         //Debug.Log("Setting ActiveTime to " + spanSec);
         activeTime = spanSec;
     }

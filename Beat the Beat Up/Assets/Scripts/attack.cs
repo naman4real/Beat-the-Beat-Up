@@ -37,6 +37,9 @@ public class attack : MonoBehaviour
             else if (collider.gameObject.name == "Left Head Collider")
                 collider.transform.root.GetComponent<Animator>().SetTrigger("leftHead");
 
+            else if (collider.gameObject.name == "Chest Collider")//right hand collider
+                collider.transform.root.GetComponent<Animator>().SetTrigger("chest");
+
             else if (collider.gameObject.name == "EXPORT_b_l_bicep") //left arm collider
                 collider.transform.root.GetComponent<Animator>().SetTrigger("leftArmPunch");
             else if (collider.gameObject.name == "EXPORT_b_r_bicep") //right arm collider
@@ -61,22 +64,22 @@ public class attack : MonoBehaviour
 
 
 
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    anim.SetTrigger("leftArmPunch");
-        //}
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    anim.SetTrigger("rightArmPunch");
-        //}
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    anim.SetTrigger("leftHandPunch");
-        //}
-        //if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    anim.SetTrigger("rightHandPunch");
-        //}
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            anim.SetTrigger("midHead");
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            anim.SetTrigger("leftHead");
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            anim.SetTrigger("rightHead");
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            anim.SetTrigger("chest");
+        }
     }
 
 }

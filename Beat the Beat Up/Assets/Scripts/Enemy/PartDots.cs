@@ -129,43 +129,23 @@ public class PartDots : MonoBehaviour
 
         if (toActivate != null)
         {
-            if (attack == "Slap")
-            {
-                toActivate.GetComponent<MeshRenderer>().material = slapMat;
-            }
-            else if (attack == "Punch")
-            {
-                toActivate.GetComponent<MeshRenderer>().material = punchMat;
-            }
-            else if (attack == "Grab")
-            {
-                bodyPartToThrow = toActivate;
-
-                toActivate.GetComponent<MeshRenderer>().material = grabMat;
-                rbLeftForearm.isKinematic = false;
-                rbRightForearm.isKinematic = false;
-                rbSpine.isKinematic = false;
-                
-                foreach (var bodyPart in bodyParts)
-                {
-                    if (RagdollMapping[bodyPart] != RagdollMapping[toActivate])
-                        RagdollMapping[bodyPart].GetComponent<Rigidbody>().isKinematic = false;
-                }
-
-
-               
-
-                transform.gameObject.GetComponent<Animator>().enabled = false;
-
-            }
-            else if (attack == "Throw")
-            {
-                RagdollMapping[bodyPartToThrow].GetComponent<Rigidbody>().isKinematic = false;
-                bodyPartToThrow = null;
-                rbSpine.AddForce((transform.up - 1.2f * transform.forward) * 100f, ForceMode.Impulse);
-            }
-
-            toActivate.GetComponent<Dot>().ActivateDot(span);
+            //if (attack == "Slap")
+            //{
+            //    toActivate.GetComponent<MeshRenderer>().material = slapMat;
+            //}
+            //else if (attack == "Punch")
+            //{
+            //    toActivate.GetComponent<MeshRenderer>().material = punchMat;
+            //}
+            //else if (attack == "Grab")
+            //{
+            //    toActivate.GetComponent<MeshRenderer>().material = grabMat;
+            //}
+            //else if (attack == "Throw")
+            //{
+            //}
+            if(attack == "Slap" || attack == "Punch" || attack == "Grab")
+                toActivate.GetComponent<Dot>().ActivateDot(span,attack);
         }
     }
 
