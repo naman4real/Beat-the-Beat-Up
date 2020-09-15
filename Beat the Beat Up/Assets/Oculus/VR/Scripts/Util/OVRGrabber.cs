@@ -16,6 +16,7 @@ permissions and limitations under the License.
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Allows grabbing and throwing of objects with the OVRGrabbable component on them.
@@ -26,7 +27,7 @@ public class OVRGrabber : MonoBehaviour
     // Grip trigger thresholds for picking up objects, with some hysteresis.
     public float grabBegin = 0.55f;
     public float grabEnd = 0.35f;
-    public static bool grabbed = false;
+    public bool grabbed = false;
     bool alreadyUpdated = false;
 
     // Demonstrates parenting the held object to the hand's transform when grabbed.
@@ -37,11 +38,13 @@ public class OVRGrabber : MonoBehaviour
     [SerializeField]
     protected bool m_parentHeldObject = false;
 
-	// If true, this script will move the hand to the transform specified by m_parentTransform, using MovePosition in
-	// FixedUpdate. This allows correct physics behavior, at the cost of some latency. In this usage scenario, you
-	// should NOT parent the hand to the hand anchor.
-	// (If m_moveHandPosition is false, this script will NOT update the game object's position.
-	// The hand gameObject can simply be attached to the hand anchor, which updates position in LateUpdate,
+    [SerializeField] private Text performanceText;
+
+    // If true, this script will move the hand to the transform specified by m_parentTransform, using MovePosition in
+    // FixedUpdate. This allows correct physics behavior, at the cost of some latency. In this usage scenario, you
+    // should NOT parent the hand to the hand anchor.
+    // (If m_moveHandPosition is false, this script will NOT update the game object's position.
+    // The hand gameObject can simply be attached to the hand anchor, which updates position in LateUpdate,
     // gaining us a few ms of reduced latency.)
     [SerializeField]
     protected bool m_moveHandPosition = false;
@@ -73,7 +76,7 @@ public class OVRGrabber : MonoBehaviour
     protected Quaternion m_anchorOffsetRotation;
     protected Vector3 m_anchorOffsetPosition;
     protected float m_prevFlex;
-	protected OVRGrabbable m_grabbedObj = null;
+	public OVRGrabbable m_grabbedObj = null;
     protected Vector3 m_grabbedObjectPosOff;
     protected Quaternion m_grabbedObjectRotOff;
 	protected Dictionary<OVRGrabbable, int> m_grabCandidates = new Dictionary<OVRGrabbable, int>();
@@ -223,12 +226,10 @@ public class OVRGrabber : MonoBehaviour
         
         if ((m_prevFlex >= grabBegin) && (prevFlex < grabBegin))
         {
-            grabbed = true;
             GrabBegin();
         }
         else if ((m_prevFlex <= grabEnd) && (prevFlex > grabEnd))
         {
-            grabbed = false;
             GrabEnd();
         }
     }
@@ -275,6 +276,7 @@ public class OVRGrabber : MonoBehaviour
 
             m_grabbedObj = closestGrabbable;
             m_grabbedObj.GrabBegin(this, closestGrabbableCollider);
+            
 
             m_lastPos = transform.position;
             m_lastRot = transform.rotation;

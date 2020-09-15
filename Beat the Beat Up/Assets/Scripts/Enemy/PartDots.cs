@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR;
 
 public class PartDots : MonoBehaviour
 {
+
     [SerializeField] GameObject RightStomach;     
     [SerializeField] GameObject MidStomach;
     [SerializeField] GameObject LeftStomach;
@@ -35,8 +37,7 @@ public class PartDots : MonoBehaviour
     [SerializeField] GameObject rightHand;
 
     GameObject ragdollPart = null;
-
-
+    private bool grabbed = false;
 
     GameObject[] bodyParts;
     [SerializeField] GameObject[] Legs;
@@ -46,7 +47,6 @@ public class PartDots : MonoBehaviour
 
 
     Rigidbody rbSpine,rbLeftForearm,rbRightForearm;
-    int follow = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,11 +70,21 @@ public class PartDots : MonoBehaviour
         RagdollMapping.Add(RightArm, RightArmRagdoll);
         RagdollMapping.Add(RightHand, RightHandRagdoll);
 
-        //LeftArmRagdoll.transform.parent = gameObject.transform;
-        //transform.Find("mixamorig:Hips").parent = LeftArmRagdoll.transform;
+
     }
 
-
+    private void Update()
+    {
+        if (transform.GetComponent<OVRGrabbable>().isGrabbed)
+        {
+            grab();
+            grabbed = true;
+        }
+        if(grabbed && !transform.GetComponent<OVRGrabbable>().isGrabbed)
+        {
+            release();
+        }
+    }
     public void ActivateDotAtPart(string part, float span, string attack)
     {
         if (span <= 0) return;
@@ -175,6 +185,8 @@ public class PartDots : MonoBehaviour
 
         //}
 
+        // setting all the rigid bodies of the body parts' isKinemitc=false, disabling the animator and enabing leg colliders
+        transform.GetComponent<Rigidbody>().isKinematic = false;
         ragdollPart = Hips;
         foreach (var bodyPart in bodyParts)
         {
@@ -190,7 +202,15 @@ public class PartDots : MonoBehaviour
         gameObject.GetComponent<Collider>().isTrigger=true;
 
         foreach (var legPart in Legs)
+        {
+            if(legPart.name == "Right Ankle Collider" || legPart.name == "Left Ankle Collider")
+                legPart.transform.parent.GetComponent<Rigidbody>().isKinematic = false;
+            else
+                legPart.GetComponent<Rigidbody>().isKinematic = false;
             legPart.GetComponent<Collider>().enabled = true;
+            
+        }
+            
 
     }
 

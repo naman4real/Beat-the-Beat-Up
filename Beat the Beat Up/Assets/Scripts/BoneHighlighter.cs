@@ -14,25 +14,25 @@ public class BoneHighlighter : MonoBehaviour
     
     private void Start()
     {
-        topRenderer = transform.Find("Tops").gameObject.GetComponent<Renderer>();
-        bodyRenderer = transform.Find("Body").gameObject.GetComponent<Renderer>();
+        //topRenderer = transform.Find("Tops").gameObject.GetComponent<Renderer>();
+        //bodyRenderer = transform.Find("Body").gameObject.GetComponent<Renderer>();
     }
 
     private void Update()
     {
-        bodyTime -= Time.deltaTime;
-        if(bodyTime <= 0)
-        {
-            bodyRenderer.material.SetInt("_PartIndex", -1);
-            bodyTime = 0;
-        }
+        //bodyTime -= Time.deltaTime;
+        //if(bodyTime <= 0)
+        //{
+        //    bodyRenderer.material.SetInt("_PartIndex", -1);
+        //    bodyTime = 0;
+        //}
 
-        topTime -= Time.deltaTime;
-        if (topTime <= 0)
-        {
-            topRenderer.material.SetInt("_PartIndex", -1);
-            topTime = 0;
-        }
+        //topTime -= Time.deltaTime;
+        //if (topTime <= 0)
+        //{
+        //    topRenderer.material.SetInt("_PartIndex", -1);
+        //    topTime = 0;
+        //}
     }
 
     /*-------------------
@@ -106,15 +106,15 @@ public class BoneHighlighter : MonoBehaviour
                 idx = -1;
                 break;
         }
-        if(body)
-        {
-            bodyTime = span;
-            bodyRenderer.material.SetInt("_PartIndex", idx);
-        }
-        if(top)
-        {
-            topTime = span;
-            topRenderer.material.SetInt("_PartIndex", idx);
-        }
+        //if(body)
+        //{
+        //    bodyTime = span;
+        //    bodyRenderer.material.SetInt("_PartIndex", idx);
+        //}
+        //if(top)
+        //{
+        //    topTime = span;
+        //    topRenderer.material.SetInt("_PartIndex", idx);
+        //}
     }
 }
