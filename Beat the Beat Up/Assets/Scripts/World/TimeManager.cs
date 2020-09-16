@@ -6,7 +6,7 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     public float slowdownFactor = 0.05f;
-    public float slowdownLength = 10f;
+    public float slowdownLength = 5f;
     public GameObject AudioSouce;
 
     private float slowingtTime = 0f;
