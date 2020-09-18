@@ -62,7 +62,6 @@ public class MusicEventHandler : MonoBehaviour
     {
         float deltaTimeMusicStart = Time.time - timeMusicStart;
         yield return new WaitForSeconds(events.Peek().timing - deltaTimeMusicStart);
-
         // trigger events
         bool playAllUpToCurrent = false;
         while(!playAllUpToCurrent && events.Count > 0)
