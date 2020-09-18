@@ -3188,7 +3188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca095fe7472e6854c862de5cdc70c57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowdownFactor: 0.05
+  slowdownFactor: 0.4
   slowdownLength: 5
   AudioSouce: {fileID: 628215663}
 --- !u!4 &181200736

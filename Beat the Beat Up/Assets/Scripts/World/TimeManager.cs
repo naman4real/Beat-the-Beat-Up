@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    public float slowdownFactor = 0.05f;
+    public float slowdownFactor = 0.4f;
     public float slowdownLength = 5f;
     public GameObject AudioSouce;
 
@@ -27,7 +27,7 @@ public class TimeManager : MonoBehaviour
         //slow the timeScale
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
         ///slow the music
-        audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Pitch", 0.5f);
+        audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Pitch", slowdownFactor);
     }
     private void LateUpdate()
     {
